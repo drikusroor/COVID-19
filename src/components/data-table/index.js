@@ -16,6 +16,7 @@ const useStyles = makeStyles({
 
 export default function DataTable({ dataset }) {
   const classes = useStyles()
+  if (!dataset || dataset.length < 1) return null
 
   const headers = dataset[0]
   const rows = dataset.slice(1, dataset.length - 1)
@@ -31,10 +32,10 @@ export default function DataTable({ dataset }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name}>
+          {rows.map((row, index) => (
+            <TableRow key={index}>
               {row.map((cell, index) => (
-                <TableCell component="th" scope="row">
+                <TableCell key={index} component="th" scope="row">
                   {cell}
                 </TableCell>
               ))}

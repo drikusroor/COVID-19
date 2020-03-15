@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Grid, Typography } from '@material-ui/core'
+import { Container, Typography } from '@material-ui/core'
 import Box from '@material-ui/core/Box'
 import Link from '@material-ui/core/Link'
-import ProTip from './ProTip'
 import getData from './services/dataset'
-import DataTable from './components/data-table'
+import DataTableTabs from './components/data-table-tabs'
 
 function Copyright() {
   return (
@@ -36,11 +35,7 @@ export default function App() {
         <Typography variant="h4" component="h1" gutterBottom>
           COVID-19 histogram per country
         </Typography>
-        {datasets.map((dataset, index) => (
-          <Grid item xs={12}>
-            <DataTable key={index} dataset={dataset} />
-          </Grid>
-        ))}
+        <DataTableTabs datasets={datasets} />
         <Copyright />
       </Box>
     </Container>
