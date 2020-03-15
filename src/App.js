@@ -20,10 +20,12 @@ function Copyright() {
   )
 }
 
-function App({ fetchTimeSeries, timeSeries }) {
+function App({ countries, fetchTimeSeries, timeSeries }) {
   useEffect(() => {
     fetchTimeSeries()
   }, [])
+
+  console.log({ countries })
 
   return (
     <Container maxWidth="xl">
@@ -40,7 +42,17 @@ function App({ fetchTimeSeries, timeSeries }) {
 
 export default connect(
   state => {
-    return { timeSeries: state.timeSeries }
+    return {
+      timeSeries: state.timeSeries,
+      countries: state.timeSeries.data
+        ? state.timeSeries.data[0].reduce((acc, curr) => {
+            return {
+              ...acc,
+              [curr[1]]: curr[1],
+            }
+          }, {})
+        : {},
+    }
   },
   {
     fetchTimeSeries,
