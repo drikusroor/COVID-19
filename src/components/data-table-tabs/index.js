@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import DataTable from '../data-table'
+import LineGraph from '../line-graph'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props
@@ -69,13 +70,16 @@ export default function DataTableTabs({ datasets }) {
       {datasets ? (
         <>
           <TabPanel value={value} index={0}>
-            <DataTable dataset={datasets[0]} />
+            <LineGraph dataset={datasets[0]} />
+            {/* <DataTable dataset={datasets[0]} /> */}
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <DataTable dataset={datasets[1]} />
+            <LineGraph dataset={datasets[1]} />
+            {/* <DataTable dataset={datasets[1]} /> */}
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <DataTable dataset={datasets[2]} />
+            <LineGraph dataset={datasets[2]} />
+            {/* <DataTable dataset={datasets[2]} /> */}
           </TabPanel>
         </>
       ) : null}

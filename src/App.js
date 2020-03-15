@@ -9,6 +9,7 @@ import { fetchTimeSeries } from './store/time-series/actions'
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
+      <br />
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         Koko Koding
@@ -39,7 +40,6 @@ function App({ fetchTimeSeries, timeSeries }) {
 
 export default connect(
   state => {
-    console.log({ state })
     return { timeSeries: state.timeSeries }
   },
   {
