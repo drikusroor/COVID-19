@@ -1,9 +1,10 @@
-import React from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-import ProTip from './ProTip';
+import React, { useEffect, useState } from 'react'
+import Container from '@material-ui/core/Container'
+import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
+import Link from '@material-ui/core/Link'
+import ProTip from './ProTip'
+import getData from './services/dataset'
 
 function Copyright() {
   return (
@@ -15,10 +16,20 @@ function Copyright() {
       {new Date().getFullYear()}
       {'.'}
     </Typography>
-  );
+  )
 }
 
 export default function App() {
+  const [rows, setRows] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      const dataset = await getData()
+      setRows(dataset)
+    }
+    fetchData()
+  }, [])
+
   return (
     <Container maxWidth="sm">
       <Box my={4}>
@@ -29,5 +40,5 @@ export default function App() {
         <Copyright />
       </Box>
     </Container>
-  );
+  )
 }
