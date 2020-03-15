@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Container, Typography } from '@material-ui/core'
 import Box from '@material-ui/core/Box'
 import Link from '@material-ui/core/Link'
-import getData from './services/dataset'
 import DataTableTabs from './components/data-table-tabs'
+import { connect } from 'react-redux'
+import { fetchTimeSeries } from './store/time-series/actions'
 
 function Copyright() {
   return (
@@ -18,15 +19,9 @@ function Copyright() {
   )
 }
 
-export default function App() {
-  const [datasets, setDatasets] = useState([])
-
+function App({ fetchTimeSeries, timeSeries }) {
   useEffect(() => {
-    async function fetchData() {
-      const datasets = await getData()
-      setDatasets(datasets)
-    }
-    fetchData()
+    fetchTimeSeries()
   }, [])
 
   return (
@@ -35,9 +30,19 @@ export default function App() {
         <Typography variant="h4" component="h1" gutterBottom>
           COVID-19 histogram per country
         </Typography>
-        <DataTableTabs datasets={datasets} />
+        <DataTableTabs datasets={timeSeries.data} />
         <Copyright />
       </Box>
     </Container>
   )
 }
+
+export default connect(
+  state => {
+    console.log({ state })
+    return { timeSeries: state.timeSeries }
+  },
+  {
+    fetchTimeSeries,
+  },
+)(App)
