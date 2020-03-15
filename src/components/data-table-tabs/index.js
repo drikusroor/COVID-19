@@ -71,15 +71,18 @@ export default function DataTableTabs({ datasets }) {
         <>
           <TabPanel value={value} index={0}>
             <LineGraph dataset={datasets[0]} />
-            {/* <DataTable dataset={datasets[0]} /> */}
+            <br />
+            <DataTable dataset={datasets[0]} />
           </TabPanel>
           <TabPanel value={value} index={1}>
             <LineGraph dataset={datasets[1]} />
-            {/* <DataTable dataset={datasets[1]} /> */}
+            <br />
+            <DataTable dataset={datasets[1]} />
           </TabPanel>
           <TabPanel value={value} index={2}>
             <LineGraph dataset={datasets[2]} />
-            {/* <DataTable dataset={datasets[2]} /> */}
+            <br />
+            <DataTable dataset={datasets[2]} />
           </TabPanel>
         </>
       ) : null}
