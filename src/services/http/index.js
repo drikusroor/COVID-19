@@ -12,7 +12,7 @@ export default async url => {
   const result = await reader.read() // raw array
   const decoder = new TextDecoder('utf-8')
   const csv = decoder.decode(result.value) // the csv text
-  const results = Papa.parse(csv, { header: true }) // object with { data, errors, meta }
+  const results = Papa.parse(csv, { header: false }) // object with { data, errors, meta }
   const rows = results.data // array of objects
   return rows
 }
