@@ -13,7 +13,7 @@ export const getCountries = state => {
           }
         }, {})
       : {},
-  )
+  ).sort()
 }
 
 export const getFilters = state => state.filters || {}

@@ -135,8 +135,7 @@ const FilterForm = props => {
 
   const onDelete = (event, value) => {
     event.stopPropagation()
-    console.log({ event, value })
-    // removeCountry(value)
+    removeCountry(value)
   }
 
   return (
@@ -157,7 +156,6 @@ const FilterForm = props => {
                 input={<Input id="select-multiple-chip" />}
                 defaultValue={[]}
                 renderValue={selected => {
-                  console.log({ selected })
                   return (
                     <div className={classes.chips}>
                       {selected.map(value => (

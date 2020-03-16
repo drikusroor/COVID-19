@@ -30,8 +30,6 @@ function App({ countries, countryFilter, fetchTimeSeries, timeSeries }) {
     fetchTimeSeries()
   }, [])
 
-  console.log({ countries })
-
   return (
     <Container maxWidth="xl">
       <Box my={4}>
