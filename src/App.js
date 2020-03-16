@@ -5,6 +5,7 @@ import Link from '@material-ui/core/Link'
 import DataTableTabs from './components/data-table-tabs'
 import { connect } from 'react-redux'
 import { fetchTimeSeries } from './store/time-series/actions'
+import { getFilteredTimeSeries } from './store/time-series/selectors'
 
 function Copyright() {
   return (
@@ -25,15 +26,13 @@ function App({ countries, fetchTimeSeries, timeSeries }) {
     fetchTimeSeries()
   }, [])
 
-  console.log({ countries })
-
   return (
     <Container maxWidth="xl">
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
           COVID-19 histogram per country
         </Typography>
-        <DataTableTabs datasets={timeSeries.data} />
+        <DataTableTabs datasets={timeSeries} />
         <Copyright />
       </Box>
     </Container>
@@ -43,7 +42,7 @@ function App({ countries, fetchTimeSeries, timeSeries }) {
 export default connect(
   state => {
     return {
-      timeSeries: state.timeSeries,
+      timeSeries: getFilteredTimeSeries(state),
       countries: state.timeSeries.data
         ? state.timeSeries.data[0].reduce((acc, curr) => {
             return {

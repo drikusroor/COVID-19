@@ -19,7 +19,7 @@ export default function DataTable({ dataset }) {
   if (!dataset || dataset.length < 1) return null
 
   const headers = dataset[0]
-  const rows = dataset.slice(1, dataset.length - 1)
+  const rows = dataset.slice(1, dataset.length)
 
   return (
     <TableContainer component={Paper}>
