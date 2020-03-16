@@ -2,6 +2,20 @@ import { createSelector } from 'reselect'
 
 const getTimeSeries = state => state.timeSeries.data
 
+export const getCountries = state => {
+  const dataset = state.timeSeries.data && state.timeSeries.data[0]
+  return Object.keys(
+    state.timeSeries.data
+      ? dataset.slice(1, dataset.length).reduce((acc, curr) => {
+          return {
+            ...acc,
+            [curr[1]]: curr[1],
+          }
+        }, {})
+      : {},
+  )
+}
+
 export const getFilters = state => state.filters || {}
 
 export const modifyTimeSerieRows = (datasets, modificationFn, params) => {

@@ -5,7 +5,11 @@ import Link from '@material-ui/core/Link'
 import DataTableTabs from './components/data-table-tabs'
 import { connect } from 'react-redux'
 import { fetchTimeSeries } from './store/time-series/actions'
-import { getFilteredTimeSeries } from './store/time-series/selectors'
+import {
+  getFilteredTimeSeries,
+  getCountries,
+} from './store/time-series/selectors'
+import FilterForm from './components/filter-form'
 
 function Copyright() {
   return (
@@ -21,10 +25,12 @@ function Copyright() {
   )
 }
 
-function App({ countries, fetchTimeSeries, timeSeries }) {
+function App({ countries, countryFilter, fetchTimeSeries, timeSeries }) {
   useEffect(() => {
     fetchTimeSeries()
   }, [])
+
+  console.log({ countries })
 
   return (
     <Container maxWidth="xl">
@@ -32,6 +38,7 @@ function App({ countries, fetchTimeSeries, timeSeries }) {
         <Typography variant="h4" component="h1" gutterBottom>
           COVID-19 histogram per country
         </Typography>
+        <FilterForm countries={countries} countryFilter={countryFilter} />
         <DataTableTabs datasets={timeSeries} />
         <Copyright />
       </Box>
@@ -42,15 +49,9 @@ function App({ countries, fetchTimeSeries, timeSeries }) {
 export default connect(
   state => {
     return {
+      countries: getCountries(state),
+      countryFilter: state.filters.COUNTRY_FILTER || [],
       timeSeries: getFilteredTimeSeries(state),
-      countries: state.timeSeries.data
-        ? state.timeSeries.data[0].reduce((acc, curr) => {
-            return {
-              ...acc,
-              [curr[1]]: curr[1],
-            }
-          }, {})
-        : {},
     }
   },
   {
